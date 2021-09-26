@@ -32,7 +32,7 @@ body{
 }
 
 main{
-    margin-top: 7rem;
+    margin-top: 3rem;
 }
 
 input, button {
@@ -66,6 +66,11 @@ button:disabled{
     padding: 1rem 0.5rem;
     font-weight: bolder;
     
+}
+
+p{
+    max-width: 90vw;
+    margin: 1rem auto 0 ;
 }
 
 footer {
