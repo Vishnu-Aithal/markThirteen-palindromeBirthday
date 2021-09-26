@@ -54,6 +54,9 @@ button{
     background-color: var(--secondary-color);
     border-color: var(--primary-color);
 }
+button:disabled{
+    background-color: white;
+}
 .output{
     display: none;
     max-width: 70vw;

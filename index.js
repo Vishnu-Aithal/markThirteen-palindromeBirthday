@@ -99,17 +99,27 @@ function checkPalindromeAllFormats(allFormatsList) {
 // new Date(date string)
 
 function findNearestPalindrome(userDate) {
-    nextPalindromeDate = findNextPalindromeDate(userDate);
-    console.log(nextPalindromeDate);
-    // previousPalindromeDate = findPreviousPalindromeDate(userDate);
-
+    var nextPalindromeDate = nearestPalindromeDateFinder(userDate, "next");
+    var previousPalindromeDate = nearestPalindromeDateFinder(userDate, "previous");
+    if (nextPalindromeDate.counter < previousPalindromeDate.counter){
+        return nextPalindromeDate;
+    } else {
+        return previousPalindromeDate;
+    }
 }
 
-function findNextPalindromeDate(userDate) {
+function nearestPalindromeDateFinder(userDate, direction) {
     var date = new Date(userDate);
     var counter = 0
     while(true){
-        date.setDate(date.getDate() + 1);
+        if(direction === "next") {
+            date.setDate(date.getDate() + 1);
+        } else if(direction === "previous") {
+            date.setDate(date.getDate() - 1);   
+        } else {
+            console.log("invalid direction argument");
+        }
+        
         counter++;
         var dateObject = {
             day:date.getDate(),
@@ -121,13 +131,12 @@ function findNextPalindromeDate(userDate) {
         var allFormatsList = getAllStrFormats(dateStrObject);
         var isDatePalindrome = checkPalindromeAllFormats(allFormatsList);
         if(isDatePalindrome){
-            palindromeDateStr = dateStrObject.day + dateStrObject.month + dateStrObject.year
+            palindromeDateStr = dateStrObject.day + "-" + dateStrObject.month + "-" + dateStrObject.year
             return {counter:counter, date:palindromeDateStr};
             
         }
     }
 }
-
 
 
 
@@ -139,10 +148,24 @@ function clickHandler() {
     var allFormatsList = getAllStrFormats(dateStrObject);
     var isDatePalindrome = checkPalindromeAllFormats(allFormatsList);
     if (isDatePalindrome) {
-        output.innerText = `Yay! Your Birthday is a Palindrome!`;
         output.style.display = "block"
+        output.innerText = "Processing...."
+        setTimeout(() => {
+            output.innerText = "Yay! Your Birthday is a Palindrome!🎉🎊🎁";
+        }, 2000);
+        
+        
     } else {
-        findNearestPalindrome(userDate);
+    var nearestPalindromeDate = findNearestPalindrome(userDate);
+    var dayDisplay = ""
+        if(nearestPalindromeDate.counter !=1){
+            dayDisplay = "days";
+        } else {dayDisplay = "day"}
+        output.style.display = "block";
+        output.innerText = "Processing...."
+        setTimeout(() => {
+        output.innerText = `The nearest palindrome date is ${nearestPalindromeDate.date}, you missed by ${nearestPalindromeDate.counter} ${dayDisplay}.`;
+        }, 2000);
 
     }
 }
