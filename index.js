@@ -152,7 +152,15 @@ function clickHandler() {
     var isDatePalindrome = checkPalindromeAllFormats(allFormatsList);
     if (isDatePalindrome) {
         output.style.display = "block"
-        output.innerText = "Processing...."
+        output.innerText = "Processing"
+        setTimeout(() => {
+            output.innerText = "Processing.";
+        }, 500);
+        setTimeout(() => {
+            output.innerText = "Processing..";
+        }, 1000);setTimeout(() => {
+            output.innerText = "Processing...";
+        }, 1500);
         setTimeout(() => {
             output.innerText = "Yay! Your Birthday is a Palindrome!🎉🎊🎁";
         }, 2000);
@@ -163,7 +171,15 @@ function clickHandler() {
         var dayDisplay = (nearestPalindromeDate.counter != 1 ? "days" : "day");
 
         output.style.display = "block";
-        output.innerText = "Processing...."
+        output.innerText = "Processing"
+        setTimeout(() => {
+            output.innerText = "Processing.";
+        }, 500);
+        setTimeout(() => {
+            output.innerText = "Processing..";
+        }, 1000);setTimeout(() => {
+            output.innerText = "Processing...";
+        }, 1500);
         setTimeout(() => {
             output.innerText = `The nearest palindrome date is ${nearestPalindromeDate.date}, you missed by ${nearestPalindromeDate.counter} ${dayDisplay}.`;
         }, 2000);
